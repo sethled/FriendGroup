@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <title>FriendGroup | Everyone needs friends!</title>
+    <style>
+        div.fileListEntry {
+            
+            background-color: whitesmoke;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            margin-top: 16px;
+            margin-bottom: 16px;
+            word-wrap: break-word;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.2em;
+            color: teal;
+            text-decoration: none;
+            
+        }
+            
+        a:link {
+            color: teal;
+            font-weight: bold;
+            text-decoration: none;
+        }
+    
+        a:visited {
+            color: tomato;
+        }
+    
+        a:hover {
+            color: slateblue;
+        }
+    
+    
+        div.fileListEntry:hover {
+    
+            text-decoration-color: violet;
+    
+        }
+    
+        ul#fileList {
+    
+            margin: 0;
+            padding-left: 0;
+            border-color: whitesmoke;
+    
+        }
+    
+    
+        #submitFileBtn {
+            display: none;
+        }
+    
+        div.groupListEntry {
+            background-color: whitesmoke;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            margin-top: 16px;
+            margin-bottom: 16px;
+            word-wrap: break-word;
+        }
+    
+        #upload_file {
+            display: none;
+        }
+    
+        #send_message {
+            border: none;
+            background-color: white;
+            float: left;
+            width: 9.8%;
+            height: 3.35vh;
+            outline: none;
+            color: black;
+            font-weight: bold;
+            font-size: 0.8em;
+            cursor: pointer;
+        }
+    
+        #send_message:hover {
+            background-color: rgb(141, 49, 153);
+            color: white;
+        }
+    
+        .chatText {
+            font-size: 1.1em;
+        }
+    
+        input#message_input {
+            float: left;
+            margin: 0px;
+            height: 6.5vh;
+            text-align: center;
+            width: 90%;
+            color: white;
+            outline: none;
+            background-color: #131313;
+            border: none;
+        }
+    
+        div#LS-topbar {
+            background-color: black;
+            border-style: solid;
+            border-color: rgb(141, 49, 153);
+            border-width: 2px;
+            color: rgb(141, 49, 153);
+            text-align: center;
+        }
+    
+        ul#groupList {
+            margin: 0;
+            padding-left: 0;
+            border-color: rgb(141, 49, 153);
+        }
+    
+        .rL-header {
+            padding: 5px;
+            background-color: black;
+            border-style: solid;
+            border-color: rgb(141, 49, 153);
+            border-width: 2px;
+            color: rgb(141, 49, 153);
+            text-align: center;
+        }
+    
+        .fL-header {
+            padding: 5px;
+            background-color: black;
+            border-style: solid;
+            border-color: rgb(141, 49, 153);
+            border-width: 2px;
+            color: rgb(141, 49, 153);
+            text-align: center;
+            border-bottom: none;
+            border-left: none;
+            border-right: none;
+        }
+    
+        .newgroupBtn {
+            cursor: pointer;
+            border-color: rgb(141, 49, 153);
+            background-color: black;
+            color: rgb(141, 49, 153);
+            font-size: 1em;
+            font-weight: bold;
+            border-radius: 8px;
+        }
+    
+        .newgroupBtn:hover {
+            cursor: pointer;
+            border-color: rgb(141, 49, 153);
+            background-color: white;
+            color: rgb(141, 49, 153);
+            font-size: 1em;
+            font-weight: bold;
+            border-radius: 8px;
+        }
+    
+        #newThemeBtn {
+            cursor: pointer;
+            border-color: rgb(141, 49, 153);
+            background-color: black;
+            color: rgb(141, 49, 153);
+            font-size: 1em;
+            font-weight: bold;
+            border-radius: 8px;
+        }
+    
+        #newThemeBtn:hover {
+            color: black;
+            background-color: rgb(141, 49, 153);
+        }
+    
+        div#chatinput {
+            width: 80%;
+            display: inline-block;
+        }
+    
+        div#chatlog {
+            width: 80%;
+            display: inline-block;
+            height: 91vh;
+            overflow-y: scroll;
+            border-bottom: 1em black;
+        }
+    
+        #cgroup {
+            font-size: 2em;
+        }
+    
+        div#leftSide {
+            box-sizing: border-box;
+            height: 100vh;
+            width: 20%;
+            float: left;
+            background-color: black;
+        }
+    
+        div#LogIn {
+            position: absolute;
+            background-color: black;
+            width: 100%;
+            height: 100%;
+            padding-top: 20%;
+        }
+    
+        body {
+            background-color: whitesmoke;
+            margin: 0;
+        }
+    
+        input.homeBtn {
+            margin-top: 1%;
+            border: none;
+            background-color: rgb(141, 49, 153);
+            color: black;
+            outline-color: white;
+            font-size: 1.5em;
+        }
+    
+        input#submitUsername {
+            margin-top: 1%;
+            border: none;
+            background-color: rgb(141, 49, 153);
+            color: black;
+            outline-color: white;
+            font-size: 1.5em;
+        }
+    
+        #loginPrompt {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+    
+        .selUserPrompt {
+            display: inline-block;
+            font-size: 1.5em;
+        }
+    
+        #loginDisplay {
+            display: none;
+        }
+    
+        #registerDisplay {
+            display: none;
+        }
+    
+        input.regLogInput {
+            text-align: center;
+            font-size: 1em;
+            color: white;
+            outline: none;
+            background-color: black;
+            border: 3px solid white;
+        }
+    
+        input.regLogInput:focus {
+            background-color: black;
+            border: 3px solid white;
+        }
+    </style>
+
+    <!-- Firebase App is always required and must be first -->
+    <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-app.js"></script>
+
+    <!-- Add additional services that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-storage.js"></script>
+
+    <!-- <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-messaging.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-functions.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase.js"></script> -->
+
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyDKWoo5sajzP0a40goVd2_qMaQmKYEyLwA",
+            authDomain: "cse-330-creative-project.firebaseapp.com",
+            databaseURL: "https://cse-330-creative-project.firebaseio.com",
+            projectId: "cse-330-creative-project",
+            storageBucket: "gs://cse-330-creative-project.appspot.com",
+            messagingSenderId: "548147964411"
+        };
+        firebase.initializeApp(config);
+
+    </script>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        let newReg;
+        let username;
+        let id = {};
+        let currentgroup;
+        let friendname = "<none>";
+        let groupsCreated = 0;
+        let mygroups = [];
+        let autoGroupKey;
+        let fileForUpload;
+        let grabbedChatLog;
+        let NUCR; // = Number of Users in Current group
+        let tempgroupObj = {
+            'name': "",
+            'activeUsers': [],
+            'owner': "",
+            'bannedUsers': [],
+            'private': false,
+            'password': ""
+        };
+
+        var socketio = io.connect();
+
+        socketio.on("linkParse", function (data) {
+            autoGroupKey = data.string;
+            console.log("autoGroupKey = " + autoGroupKey);
+            if (autoGroupKey === "favicon.ico" || autoGroupKey === undefined) {
+                autoGroupKey = "";
+            }
+
+            if (autoGroupKey != "") {
+                autoGroupKey = autoGroupKey.replace(/-/g, " ");
+            }
+        });
+
+        socketio.on("message_to_client", function (data) {
+            //Append an HR thematic break and the escaped HTML of the new message
+            if (!(data.private)) {
+                let nSpan = document.createElement("span");
+                nSpan.textContent = (data['message']);
+                nSpan.setAttribute("class", "chatText");
+                document.getElementById("chatlog").appendChild(document.createElement("hr"));
+                document.getElementById("chatlog").appendChild(nSpan);
+            }
+
+            else {
+                if (data.sender === username || data.recipient === username) {
+                    let newStrong = document.createElement("strong");
+                    document.getElementById("chatlog").appendChild(document.createElement("hr"));
+                    newStrong.textContent = "[PRIVATE] " + data.sender + ": ";
+                    let newSpan = document.createElement("span");
+                    newSpan.appendChild(newStrong);
+                    newSpan.appendChild(document.createTextNode(data.message));
+                    document.getElementById("chatlog").appendChild(newSpan);
+                }
+            }
+
+            let chatDiv = document.getElementById("chatlog");
+            chatDiv.scrollTop = chatDiv.scrollHeight;
+        });
+
+        function appendMessage(message) {
+
+            if (message.type === "file") {
+
+                let list = document.getElementById("fileList");
+                let newEntry = document.createElement("div");
+                newEntry.setAttribute("class", "fileListEntry");
+
+                let roomTitle = document.createElement("a");
+                roomTitle.setAttribute("href", fileLink)
+                roomTitle.textContent = fileName;
+
+                newEntry.appendChild(roomTitle);
+                list.appendChild(newEntry);
+                console.log("addFileToList Ran!");
+
+                socketio.emit("fileMessage_to_server", { fileName: fileName, fileLink: fileLink, friendname: friendname, group: currentgroup });
+
+
+            }
+            else {
+                let nSpan = document.createElement("span");
+                nSpan.textContent = (message);
+                nSpan.setAttribute("class", "chatText");
+                document.getElementById("chatlog").appendChild(document.createElement("hr"));
+                document.getElementById("chatlog").appendChild(nSpan);
+                let chatDiv = document.getElementById("chatlog");
+                chatDiv.scrollTop = chatDiv.scrollHeight;
+            }
+        }
+
+        socketio.on("fileMessage_to_client", function (data) {
+            //Append an HR thematic break and the escaped HTML of the new message
+
+            let nSpan = document.createElement("span");
+            let newA = document.createElement("a");
+            newA.setAttribute("href", data.fileLink);
+            let newFName = document.createTextNode(data.fileName);
+            let newMsg = data.friendname + " has sent a file named: "
+            newA.textContent = newMsg;
+            newA.appendChild(newFName);
+            nSpan.appendChild(newA);
+            nSpan.setAttribute("class", "chatText");
+            document.getElementById("chatlog").appendChild(document.createElement("hr"));
+            document.getElementById("chatlog").appendChild(nSpan);
+            let chatDiv = document.getElementById("chatlog");
+            chatDiv.scrollTop = chatDiv.scrollHeight;
+        });
+
+        function sendMessage() {
+            let msg = friendname + ": " + document.getElementById("message_input").value;
+            document.getElementById("message_input").value = "";
+
+            socketio.emit("message_to_server", { message: msg, group: currentgroup });
+            console.log(msg);
+        }
+
+        // function that allows users to join and/or create a chat group.
+        function creategroup() {
+            let newgroupName;
+            let groupPass;
+            let ckey;
+            let cgroup = prompt("Please enter the desired name of your new group!");
+
+            if (!cgroup) {
+                alert("Please try again, and enter a name!");
+            }
+
+            else if ((cgroup.length) > 35) {
+                alert("Please submit a group name of 35 characters or less. Try again.");
+            }
+
+            else {
+                groupPass = prompt("Please enter your desired group-password:");
+                newgroupName = cgroup;
+
+                if (groupPass) {
+                    ckey = prompt("Please enter your desired group key!");
+
+                    if (ckey.includes("-")) {
+                        alert("Please submit a groupkey that does not contain the character '-'! Thank you.");
+                        creategroup();
+                        return
+                    }
+
+                    if (ckey) {
+                        socketio.emit("addgroup", { group: newgroupName, user: username, pass: groupPass, key: ckey });
+                    }
+
+                    else {
+                        alert("You need to set a group key!");
+                        creategroup();
+                    }
+                }
+
+                else { alert("You need to enter a group password! Please try again."); }
+            }
+
+        }
+        socketio.on("groupAdded", function (data) {
+
+            if (data.value) {
+                let newgroupName = data.group;
+                currentgroup = newgroupName;
+                jcgroupBackend(newgroupName);
+                let tskey = data.key;
+                let tsckey = tskey.replace(/ /g, "-");
+                alert("This is the group-join-link for your FriendGroup: localhost:3456/" + tsckey);
+                populateLeftBarHeader();
+            }
+
+            else {
+
+                if (data.reason === "madeGroup") {
+                    alert("Error: Cannot create multiple groups.");
+                }
+
+                else {
+                    alert("All group keys must be unique! Please select a different group key!");
+                    creategroup();
+                }
+            }
+        });
+
+        function jcgroupBackend(groupName, groupKey) {
+            socketio.emit("joininggroup", { newgroup: groupName, user: username, friendname: friendname, key: groupKey });
+
+            //update left side header
+            populateLeftBarHeader();
+        }
+
+        function joingroup(calledFromBtn) {
+
+            if (calledFromBtn) {
+
+                let tKey = prompt("Please enter the key of the group you'd like to join.");
+                socketio.emit("doeskeyexist", { key: tKey, cfb: calledFromBtn });
+
+            }
+
+            else {
+
+                if (autoGroupKey != "") {
+                    console.log("Joingroup ran as the result of autoGroupKey being set.");
+                    let tKey = autoGroupKey;
+                    socketio.emit("doeskeyexist", { key: tKey, cfb: calledFromBtn });
+                }
+
+                else {
+                    let tKey = prompt("Please enter the key of the group you'd like to join.");
+                    socketio.emit("doeskeyexist", { key: tKey, cfb: calledFromBtn });
+                }
+            }
+        }
+
+        socketio.on("keyexists", function (data) {
+
+            if (data.value === true) {
+                let tPass = prompt("Please enter the password of the group you'd like to join!");
+                socketio.emit("joinGroup", { key: data.key, pass: tPass, user: username, bypass: false });
+            }
+
+            else {
+
+                if (autoGroupKey != "" && !data.cfb) {
+                    alert("Invalid group-join link! Please try again.");
+                }
+
+                else {
+                    alert("Invalid group key! Try again.");
+                }
+            }
+        });
+
+        socketio.on("confirmJoin", function (data) {
+
+            if (data.joined === true) {
+                currentgroup = data.groupname;
+                populateLeftBarHeader();
+                grabbedChatLog = data.chatlog;
+                clearChat();
+                clearFileList()
+                for (let i = 0; i < grabbedChatLog.length; i++) {
+                    if (grabbedChatLog[i][0] === "text") {
+                        console.log('grabbedChatLog = "text" and ran if statement')
+                        console.log("Chat log: " + grabbedChatLog);
+                        appendMessage(grabbedChatLog[i][1]);
+                    }
+                    else {
+                        console.log("Now registered that whatever was grabbed from chat log is NOT of type text.");
+                        console.log("Chat log: " + grabbedChatLog);
+                        // add files to chat
+                        let nSpan = document.createElement("span");
+                        let newA = document.createElement("a");
+                        newA.setAttribute("href", grabbedChatLog[i][2]);
+                        let newFName = document.createTextNode(grabbedChatLog[i][1]);
+                        let newMsg = grabbedChatLog[i][3] + " has sent a file named: "
+                        newA.textContent = newMsg;
+                        newA.appendChild(newFName);
+                        nSpan.appendChild(newA);
+                        nSpan.setAttribute("class", "chatText");
+                        document.getElementById("chatlog").appendChild(document.createElement("hr"));
+                        document.getElementById("chatlog").appendChild(nSpan);
+                        let chatDiv = document.getElementById("chatlog");
+                        chatDiv.scrollTop = chatDiv.scrollHeight;
+
+                        // append all files to left hand side of screen
+                        let list = document.getElementById("fileList");
+                        let newEntry = document.createElement("div");
+                        newEntry.setAttribute("class", "fileListEntry");
+
+                        let roomTitle = document.createElement("a");
+                        roomTitle.setAttribute("href", grabbedChatLog[i][2])
+                        roomTitle.textContent = grabbedChatLog[i][1];
+
+                        newEntry.appendChild(roomTitle);
+                        list.appendChild(newEntry);
+                        console.log("addFileToList Ran!");
+                    }
+
+                }
+
+            }
+
+            else {
+                alert("Incorrect password, please try again!");
+            }
+        });
+
+        function changeFriendName() {
+            friendname = prompt("What would you like your new FriendName to be?");
+            socketio.emit("friendNameUpdate", { user: username, friendname: friendname, room: currentgroup });
+            populateLeftBarHeader();
+        }
+
+        function showLogin() {
+            newReg = false;
+            document.getElementById("oneLine").style.display = "none";
+            document.getElementById("loginDisplay").style.display = "inline";
+            document.getElementById("registerDisplay").style.display = "none";
+        }
+
+        function showRegister() {
+            newReg = true;
+            document.getElementById("oneLine").style.display = "none";
+            document.getElementById("loginDisplay").style.display = "none";
+            document.getElementById("registerDisplay").style.display = "inline";
+        }
+
+        function login() {
+            let phUsername = document.getElementById("logUserNameInput").value;
+            let phPassword = document.getElementById("logPasswordInput").value;
+            socketio.emit("login", { user: phUsername, pass: phPassword });
+        }
+
+        function register() {
+            let phUsername = document.getElementById("regUserNameInput").value;
+            let phPassword = document.getElementById("regPasswordInput").value;
+            let phEmail = document.getElementById("regEmailInput").value;
+            let phFriendName = document.getElementById("regFNInput").value;
+
+            // FIREBASE
+            firebase.auth().createUserWithEmailAndPassword(phEmail, phPassword)
+                .then(function () {
+                    socketio.emit("register", { user: phUsername, pass: phPassword, email: phEmail, friendname: phFriendName });
+                    let user = firebase.auth().currentUser;
+                    user.sendEmailVerification().then(function () {
+                        alert("A confirmation email was sent to the address: " + user.email);
+                    }).catch(function (error) {
+                        alert(error.message);
+                    });
+                })
+                .catch(function (error) {
+                    // Handle Errors here.
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    let user = firebase.auth().currentUser;
+                    alert(errorMessage);
+                });
+            // FIREBASE ENDS
+        }
+
+
+
+        // the following code is theoretically apart of the login function, although not contained within it
+        socketio.on("registeredUser", function (tf) {
+            // alert("tf value = " + tf.value); --> DEBUG
+            if (tf["value"]) {
+                username = document.getElementById("regUserNameInput").value;
+                friendname = document.getElementById("regFNInput").value;
+                let user = firebase.auth().currentUser;
+                let isVerified = user.emailVerified;
+                alert("Please check your email to verify your account, thank you.");
+                document.getElementById("LogIn").style.display = "none";
+                currentgroup = "none";
+
+                if (autoGroupKey != "") {
+                    joingroup(false);
+                }
+                populateLeftBarHeader();
+            }
+
+            else { alert("That username is unavailable! Try another one."); }
+        });
+
+        socketio.on("userLoggedIn", function (tf) {
+            if (tf["value"]) {
+                username = tf.user;
+                friendname = tf.friendname;
+                document.getElementById("LogIn").style.display = "none";
+                currentgroup = tf.friendGroup;
+                if (autoGroupKey != "") {
+                    joingroup(false);
+                }
+                clearChat();
+                clearFileList()
+                grabbedChatLog = tf.chatlog;
+
+                for (let i = 0; i < grabbedChatLog.length; i++) {
+                    if (grabbedChatLog[i][0] === "text") {
+                        console.log('grabbedChatLog = "text" and ran if statement')
+                        console.log("Chat log: " + grabbedChatLog);
+                        appendMessage(grabbedChatLog[i][1]);
+                    }
+                    else {
+                        console.log("Now registered that whatever was grabbed from chat log is NOT of type text.");
+                        console.log("Chat log: " + grabbedChatLog);
+                        // add files to chat
+                        let nSpan = document.createElement("span");
+                        let newA = document.createElement("a");
+                        newA.setAttribute("href", grabbedChatLog[i][2]);
+                        let newFName = document.createTextNode(grabbedChatLog[i][1]);
+                        let newMsg = grabbedChatLog[i][3] + " has sent a file named: "
+                        newA.textContent = newMsg;
+                        newA.appendChild(newFName);
+                        nSpan.appendChild(newA);
+                        nSpan.setAttribute("class", "chatText");
+                        document.getElementById("chatlog").appendChild(document.createElement("hr"));
+                        document.getElementById("chatlog").appendChild(nSpan);
+                        let chatDiv = document.getElementById("chatlog");
+                        chatDiv.scrollTop = chatDiv.scrollHeight;
+
+                        // append all files to left hand side of screen
+                        let list = document.getElementById("fileList");
+                        let newEntry = document.createElement("div");
+                        newEntry.setAttribute("class", "fileListEntry");
+
+                        let roomTitle = document.createElement("a");
+                        roomTitle.setAttribute("href", grabbedChatLog[i][2])
+                        roomTitle.textContent = grabbedChatLog[i][1];
+
+                        newEntry.appendChild(roomTitle);
+                        list.appendChild(newEntry);
+                        console.log("addFileToList Ran!");
+                    }
+
+                }
+
+                populateLeftBarHeader();
+            }
+
+            else { alert("Invalid login information. Try again."); }
+        });
+
+        // creating "clearChat" function, which clears all previously existing messages chats from the window. May or may not decide to implement into final version of Creative Project.
+        function clearChat() {
+            let CL = document.getElementById("chatlog");
+            let newCL = document.createElement("div");
+            newCL.setAttribute("id", "chatlog");
+            document.getElementById("main").removeChild(CL);
+            document.getElementById("main").appendChild(newCL);
+            CL = newCL;
+        }
+
+        // creating "clearChat" function, which clears all previously existing messages chats from the window. May or may not decide to implement into final version of Creative Project.
+        function clearFileList() {
+            let FL = document.getElementById("fileList");
+            let newFL = document.createElement("ul");
+            newFL.setAttribute("id", "fileList");
+            document.getElementById("fileMain").removeChild(FL);
+            document.getElementById("fileMain").appendChild(newFL);
+            FL = newFL;
+        }
+
+        // self explanatory function that populates the contents of the "header bar" on the left side on the user's screen
+        function populateLeftBarHeader() {
+            document.getElementById("cgroup").textContent = currentgroup;
+            document.getElementById("friendname").textContent = friendname;
+        }
+
+        // function that runs when a user attempts to upload a file by pressing this "upload file" button
+        function submitFile() {
+
+            // Create a storage reference from our storage service
+            let storageRef = firebase.storage().ref();
+
+            // File or Blob named mountains.jpg
+            let file = fileForUpload;
+
+            // Create the file metadata
+            let metadata = {
+
+            };
+
+            // Upload file and metadata to the object 'images/mountains.jpg'
+            let uploadTask = storageRef.child('/someFileGroup/' + file.name).put(file, metadata);
+            alert(file.name);
+
+            // Listen for state changes, errors, and completion of the upload.
+            uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
+                function (snapshot) {
+                    // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+                    var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    alert('Upload is ' + progress + '% done');
+                    switch (snapshot.state) {
+                        case firebase.storage.TaskState.PAUSED: // or 'paused'
+                            alert('Upload is paused');
+                            break;
+                        case firebase.storage.TaskState.RUNNING: // or 'running'
+                            alert('Upload is running');
+                            break;
+                    }
+                }, function (error) {
+
+                    // A full list of error codes is available at
+                    // https://firebase.google.com/docs/storage/web/handle-errors
+
+                }, function () {
+                    // Upload completed successfully, now we can get the download URL
+                    uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+                        console.log('File available at', downloadURL);
+                        addFileToList(file.name, downloadURL);
+                    });
+                });
+        }
+
+        function fileAdded(event) {
+            console.log(event.target.files[0]);
+            document.getElementById("submitFileBtn").style.display = "inline";
+            let fileElement = document.getElementById("submitFileBtn");
+            fileForUpload = event.target.files[0];
+            document.getElementById("fileStatus").textContent = "Uploaded File Named: " + fileForUpload.name;
+
+        }
+
+        function addFileToList(fileName, fileLink) {
+
+            if (currentgroup != "none") {
+                let list = document.getElementById("fileList");
+                let newEntry = document.createElement("div");
+                newEntry.setAttribute("class", "fileListEntry");
+
+                let roomTitle = document.createElement("a");
+                roomTitle.setAttribute("href", fileLink)
+                roomTitle.textContent = fileName;
+
+                newEntry.appendChild(roomTitle);
+                list.appendChild(newEntry);
+                console.log("addFileToList Ran!");
+
+                socketio.emit("fileMessage_to_server", { fileName: fileName, fileLink: fileLink, friendname: friendname, group: currentgroup });
+            }
+        }
+
+        // function emitFile(fileName, fileLink) {
+        //     let msgP1 = friendname + " has uploaded a file named: " + document.getElementById("message_input").value;
+        //     let msgP2 = friendname + " has uploaded a file named: " + document.getElementById("message_input").value;
+        //     document.getElementById("message_input").value = "";
+        //     console.log(msg);
+        // }
+
+
+    </script>
+</head>
+
+<body>
+
+    <!-- Initial login screen created in the div "LogIn" displayed below. -->
+    <div id="LogIn">
+        <div id="loginPrompt">
+            <div id="regLogPrompt">
+                <div id="registerDisplay">
+                    <div>
+                        <p class = "selUserPrompt">Please input your desired username: </p>
+                        <input type="text" id="regUserNameInput" class="regLogInput" />
+                    </div>
+                    <div>
+                        <p class = "selUserPrompt">Please enter your desired password: </p>
+                        <input type="password" id="regPasswordInput" class="regLogInput" />
+                    </div>
+                    <div>
+                        <p class = "selUserPrompt">Please enter your email address: </p>
+                        <input type="text" id="regEmailInput" class="regLogInput" />
+                    </div>
+                    <div>
+                        <p class = "selUserPrompt">Choose a fun friendname: </p>
+                        <input type="text" id="regFNInput" class="regLogInput" />
+                    </div>
+                    <input type="button" id="submitRegister" value="Register" onclick="register()" />
+                </div>
+                <div id="loginDisplay">
+                    <div>
+                        <p class = "selUserPrompt">username: </p>
+                        <input type="text" id="logUserNameInput" class="regLogInput" />
+                    </div>
+                    <div>
+                        <p class = "selUserPrompt">password: </p>
+                        <input type="password" id="logPasswordInput" class="regLogInput" />
+                    </div>
+                    <input type="button" id="submitLogin" value="Login" onclick="login()" />
+                </div>
+            </div>
+            <div id="oneLine">
+                <p class = "selUserPrompt">Please login or register!</p>
+                <input type="button" class="homeBtn" value="Login" onclick="showLogin()" />
+                <input type="button" class="homeBtn" value="Register" onclick="showRegister()" />
+            </div>
+        </div>
+    </div>
+
+    <div id="main">
+        <!-- Below: "leftside" div contains chat groups, current group, username and other info/options. Is displayed on lefthand side of user screen. -->
+        <div id="leftSide">
+            <div id="LS-topbar">
+                <strong><span id="cgroup"></span></strong>
+                <br>
+                <strong>FriendName: </strong><span id="friendname"></span>
+            </div>
+            <div id="fileMain">
+                <div class="rL-header" id="createJoinHeader">
+                    <button class="newgroupBtn" type="submit" onclick="creategroup()">Create a FriendGroup</button>
+                    <button class="newgroupBtn" type="submit" onclick="joingroup(true)">Join a FriendGroup</button>
+                </div>
+                <div class="rL-header">
+                    <button class="newgroupBtn" type="submit" onclick="changeFriendName()">Change Friend Name</button>
+                </div>
+                <div class="rL-header">
+                    <label for="upload_file" id="upload_file_label">
+                        <span class="newgroupBtn">Upload File</span>
+                        <input type="file" id="upload_file">
+                    </label>
+                    <button class="newgroupBtn" id="submitFileBtn" type=submit onclick="submitFile()">Submit File</button>
+                    <br>
+                    <span id="fileStatus"></span>
+                </div>
+                <div class="fL-header">
+                    FriendGroup File List
+                </div>
+                <ul id="fileList">
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- Divs on right side of screen displaying chat -->
+        <div id="chatinput">
+            <input placeholder="your message.. " type="text" id="message_input" />
+            <button id="send_message" onclick="sendMessage()">send</button>
+        </div>
+        <!-- <button onclick="clearChat()">Clear Chat</button> OPTIONAL FUNCTIONAL BUTTON FOR *temporarily* "CLEARING CHAT" on client side. -->
+        <div id="chatlog"></div>
+    </div>
+    <script>
+        document.getElementById('upload_file').addEventListener("change", fileAdded);
+    </script>
+</body>
+
+</html>

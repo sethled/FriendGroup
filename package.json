@@ -1,0 +1,15 @@
+{
+  "name": "group",
+  "version": "1.0.0",
+  "description": "Used the following sources throughout the process of creating this webpage:",
+  "main": "chat-server.js",
+  "scripts": {
+    "start": "nodemon chat-server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "socket.io": "^2.1.1"
+  }
+}
